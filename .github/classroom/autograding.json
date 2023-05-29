@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Design With Composition Alexa Questions Unit Test",
+      "setup": "",
+      "run": "./gradlew designwithcomposition-alexaquestions-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 11,
+      "points": null
+    },
+    {
+      "name": "Hashing and Sets Delivery Drone Unit Tests",
+      "setup": "",
+      "run": "./gradlew hashingandsets-deliverydrone-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 11,
+      "points": null
+    },
+    {
+      "name": "Hashing and Sets Fresh Fruit Unit Tests",
+      "setup": "",
+      "run": "./gradlew hashingandsets-freshfruit-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Hashing and Sets Parts Manager Unit Tests",
+      "setup": "",
+      "run": "./gradlew hashingandsets-partsmanager-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Maps Device Parts Catalog Unit Tests",
+      "setup": "",
+      "run": "./gradlew maps-devicepartscatalog-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Maps IMDB Unit Tests",
+      "setup": "",
+      "run": "./gradlew maps-imdb-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Groupwork Retail Book Unit Tests",
+      "setup": "",
+      "run": "./gradlew groupwork-retailbook-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    }
+  ]
+}
