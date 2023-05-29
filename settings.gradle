@@ -1,0 +1,10 @@
+rootProject.name = 'ata-week-6'
+include ':Utilities'
+include ':GroupWork:RetailBook'
+include ':DesignWithComposition:AlexaQuestions'
+include ':HashingAndSets:DeliveryDrone'
+include ':HashingAndSets:FreshFruit'
+include ':HashingAndSets:PartsManager'
+include ':Maps:DevicePartsCatalog'
+include ':Maps:IMDB'
+

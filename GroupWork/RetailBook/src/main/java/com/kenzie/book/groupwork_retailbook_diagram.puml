@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/' Fill out your book retail system design by
+adding classes, relationships, and methods
+'/
+
+
+class Book
+class ProductInformation
+
+enum Categories {
+
+}
+
+@enduml
