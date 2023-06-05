@@ -8,11 +8,11 @@ public class ReadOnlyAlexaQAClient {
 
     //TODO: Finish implementing this constructor
     public ReadOnlyAlexaQAClient(AlexaQA alexaQA) {
-
+        this.alexaQA = alexaQA;
     }
 
     //TODO: Finish implementing this method
     public List<AlexaAnswer> findAnswers(AlexaQuestion question) {
-        return null;
+        return alexaQA.findAnswers(question);
     }
 }

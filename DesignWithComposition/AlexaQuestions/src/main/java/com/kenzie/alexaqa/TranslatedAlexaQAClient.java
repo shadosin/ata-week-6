@@ -11,6 +11,11 @@ public class TranslatedAlexaQAClient {
 
     // TODO: Implement this method
     public String findBestAnswerAndTranslate(AlexaQuestion question) {
+        AlexaAnswer bestAnswer = bestAnswerAlexaQAClient.findBestAnswer(question);
+        if(bestAnswer != null){
+            String content = bestAnswer.getContent();
+            return translator.getTranslation(content);
+        }
         return null;
     }
 }

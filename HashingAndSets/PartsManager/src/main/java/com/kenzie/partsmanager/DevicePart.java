@@ -1,6 +1,7 @@
 package com.kenzie.partsmanager;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DevicePart {
     private String manufacturer;
@@ -45,13 +46,20 @@ public class DevicePart {
     }
 
     //TODO: Implement this method
+
+
+    @Override
     public boolean equals(Object o) {
-        return false;
+        if(o == null) return false;
+        if (this == o) return true;
+        if (getClass() != o.getClass()) return false;
+        DevicePart that = (DevicePart) o;
+        return Objects.equals(manufacturer, that.manufacturer) &&
+                Objects.equals(manufacturersPartNumber, that.manufacturersPartNumber);
     }
 
-    //TODO: Implement this method
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(getManufacturer(), getManufacturersPartNumber());
     }
 }

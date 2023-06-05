@@ -1,5 +1,7 @@
 package com.kenzie.alexaqa;
 
+import com.amazonaws.services.dynamodbv2.xspec.L;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,4 +55,7 @@ public class AlexaQAClient implements AlexaQA {
         suggestedQuestions.add(question);
         suggestedAnswers.add(answer);
     }
+
+
+
 }

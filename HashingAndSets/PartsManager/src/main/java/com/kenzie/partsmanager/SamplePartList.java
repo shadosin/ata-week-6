@@ -48,5 +48,16 @@ public class SamplePartList {
         DevicePart puiAudio = new DevicePart("PUI Audio", "AMM-2738B-R",
                 Arrays.asList(AmazonDevice.ECHO_DOT, AmazonDevice.ECHO_SHOW_5, AmazonDevice.ECHO_SHOW_8));
         System.out.println(puiAudio.hashCode());
+
+        PartManager microphonePartManager = new PartManager();
+        microphonePartManager.addDevicePart(flex);
+        microphonePartManager.addDevicePart(button);
+        microphonePartManager.addDevicePart(omnidirectional);
+        microphonePartManager.addDevicePart(noiseCancelling);
+        microphonePartManager.addDevicePart(cuiDevice);
+        microphonePartManager.addDevicePart(wired);
+        microphonePartManager.addDevicePart(cord);
+        microphonePartManager.addDevicePart(grounded);
+        microphonePartManager.addDevicePart(puiAudio);
     }
 }

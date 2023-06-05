@@ -18,12 +18,24 @@ public class BestAnswerAlexaQAClient {
     }
 
     //TODO: Implement this method
-    public AlexaAnswer findBestAnswer(AlexaQuestion question) {
-        return new AlexaAnswer("", 0.0);
+    public AlexaAnswer findBestAnswer(AlexaQuestion question){
+        List<AlexaAnswer> allAnswers = findAnswers(question);
+        AlexaAnswer bestAnswer = null;
+        double highestAnswerQuality = 0.0;
+
+        for(AlexaAnswer answer: allAnswers){
+            if(answer.getAnswerQuality() > highestAnswerQuality){
+                highestAnswerQuality = answer.getAnswerQuality();
+                bestAnswer = answer;
+            }
+        }
+        return bestAnswer;
     }
 
     //TODO: Implement this method
-    public void submitQuestionAnswerSuggestions(AlexaQuestion question, List<AlexaAnswer> answers) {
-
+    public void submitQuestionAnswerSuggestions(AlexaQuestion question, List<AlexaAnswer> answers){
+        for(AlexaAnswer answer: answers){
+            submitQuestionAnswerSuggestion(question, answer);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.kenzie.imdb;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,6 +25,13 @@ public class Imdb {
      * @param actors a set of actors that appear in the movie
      */
     public void releaseMovie(Movie movie, Set<Actor> actors) {
+        moviesToActors.put(movie, actors);
+
+        for(Actor actor: actors){
+            Set<Movie> movies = actorsToMovies.getOrDefault(actor, new HashSet<>());
+            movies.add(movie);
+            actorsToMovies.put(actor, movies);
+        }
 
     }
 
@@ -37,6 +45,19 @@ public class Imdb {
      *         to begin with
      */
     public boolean removeMovie(Movie movie) {
+        Set<Actor> actors = moviesToActors.remove(movie);
+        if (actors != null){
+            for(Actor actor : actors){
+                Set<Movie> movies = actorsToMovies.get(actor);
+                if(movies != null){
+                    movies.remove(movie);
+                    if(movies.isEmpty()){
+                        actorsToMovies.remove(actor);
+                    }
+                }
+            }
+            return true;
+        }
         return false;
     }
 
@@ -52,7 +73,13 @@ public class Imdb {
      * @param actor the actor that appears in this movie
      */
     public void tagActorInMovie(Movie movie, Actor actor) {
+        Set<Actor> actors = moviesToActors.getOrDefault(movie, new HashSet<>());
+        actors.add(actor);
+        moviesToActors.put(movie, actors);
 
+        Set<Movie> movies = actorsToMovies.getOrDefault(actor, new HashSet<>());
+        movies.add(movie);
+        actorsToMovies.put(actor, movies);
     }
 
     //TODO: Implement this method
@@ -64,7 +91,11 @@ public class Imdb {
      * @return the set of actors who are credited in the passed in movie
      */
     public Set<Actor> getActorsInMovie(Movie movie) {
-        return null;
+        if(moviesToActors.containsKey(movie)){
+            return moviesToActors.get(movie);
+        }else{
+            throw new IllegalArgumentException("Movie not found in the database");
+        }
     }
 
     // TODO: Implement this method
@@ -76,7 +107,7 @@ public class Imdb {
      * @return the set of movies that the passed in actor has appeared in
      */
     public Set<Movie> getMoviesForActor(Actor actor) {
-        return null;
+        return actorsToMovies.getOrDefault(actor, new HashSet<>());
     }
 
     // TODO: Implement this method
@@ -86,7 +117,7 @@ public class Imdb {
      * @return a set of actors that IMDB has as appeared in movies
      */
     public Set<Actor> getAllActorsInIMDB() {
-        return null;
+        return actorsToMovies.keySet();
     }
 
     // TODO: Implement this method
@@ -100,6 +131,10 @@ public class Imdb {
      *         any actor has appeared in any movie
      */
     public int getTotalNumCredits() {
-        return 0;
+        int totalCredits = 0;
+        for(Set<Movie> movies : actorsToMovies.values()){
+            totalCredits += movies.size();
+        }
+        return totalCredits;
     }
 }

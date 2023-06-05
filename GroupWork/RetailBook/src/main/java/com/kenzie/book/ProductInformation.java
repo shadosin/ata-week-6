@@ -2,6 +2,7 @@ package com.kenzie.book;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class ProductInformation {
@@ -24,6 +25,8 @@ public class ProductInformation {
      * URLs to images in S3.
      */
     private Set<String> imageUrls;
+
+    private Genre genre;
 
     public ProductInformation(String asin, String displayName, String description, Set<String> imageUrls) {
         this.asin = asin;
@@ -52,9 +55,23 @@ public class ProductInformation {
         return imageUrls;
     }
 
+
+
     public double calculateSimilarity(ProductInformation other) {
         // This is just a dummy implementation, we would probably use machine learning here to
         // actually identify similar products.
         return Math.random();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductInformation that)) return false;
+        return getAsin().equals(that.getAsin());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAsin());
     }
 }

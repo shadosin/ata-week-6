@@ -58,6 +58,12 @@ public class DroneFleet {
      */
     //TODO: Implement this method
     public boolean containsDroneFromLocation(String locationCode) {
-        return false; 
+
+        for (DeliveryDrone drone : drones) {
+            if (drone.getLocationCode().equals(locationCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

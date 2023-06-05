@@ -1,8 +1,6 @@
 package com.kenzie.partsdiscovery;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Helps expose key words from new editions of part catalogs.
@@ -16,7 +14,13 @@ public class DevicePartDiscovery {
      * @return A Map of words that appear in the catalog to the number of times they appear.
      */
     public Map<String, Integer> calculateWordCounts(PartCatalog catalog) {
-        return null;
+        Map<String, Integer> wordCounts = new HashMap<>();
+        List<String> catalogWords = catalog.getCatalogWords();
+
+        for(String word : catalogWords){
+            wordCounts.put(word, wordCounts.getOrDefault(word, 0)+1);
+        }
+        return wordCounts;
     }
 
     // TODO: Implement this method
@@ -26,7 +30,7 @@ public class DevicePartDiscovery {
      * @param wordCounts the map to remove the word from
      */
     public void removeWord(String word, Map<String, Integer> wordCounts) {
-
+        wordCounts.remove(word);
     }
 
     // TODO: Implement this method
@@ -36,7 +40,16 @@ public class DevicePartDiscovery {
      * @return The word that appears most frequently in the catalog to the number of times they appear.
      */
     public String getMostFrequentWord(Map<String, Integer> wordCounts) {
-        return null;
+        int maxCount = 0;
+        String mostFrequentWord = null;
+
+        for (Map.Entry<String, Integer> entry : wordCounts.entrySet()){
+            if(entry.getValue() > maxCount){
+                maxCount = entry.getValue();
+                mostFrequentWord = entry.getKey();
+            }
+        }
+        return mostFrequentWord;
     }
 
     // TODO: Implement this method
@@ -49,7 +62,16 @@ public class DevicePartDiscovery {
      * @return a map associating each word with its TF-IDF score.
      */
     public Map<String, Double> getTfIdfScores(Map<String, Integer> wordCounts, Map<String, Double> idfScores) {
-        return null;
+        Map<String, Double> tfIdfScores = new HashMap<>();
+
+        for(Map.Entry<String, Integer> entry: wordCounts.entrySet()){
+            String word = entry.getKey();
+            int count = entry.getValue();
+            double idfScore = idfScores.get(word);
+            double score = count * idfScore;
+            tfIdfScores.put(word, score);
+        }
+        return tfIdfScores;
     }
 
     // TODO: Implement this method. Hint: Follow the comments
@@ -65,31 +87,32 @@ public class DevicePartDiscovery {
             representing a pair from our word (String) : TF-IDF score (Double) relationship
             We want a list because we will be using this to sort and need to preserve the sorted order
          */
+        List<Map.Entry<String, Double>> entries = new ArrayList<>(tfIdfScores.entrySet());
 
 
         /*
             Sort our relationships by their values (TF-IDF scores)
             Note that this will sort in *ascending* order (ex: 0,1,2,3,4)
         */
-
-
         /*
             Reverse our list of relationships so that we
             have them in *descending* order, such that the words
             with the highest TF-IDF scores come first.
          */
-
+        entries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
         /*
             Create a list of Strings representing the top scoring words
             in our Map
          */
-
+        List<String> bestScoredWords = new ArrayList<>();
 
         // For the top ten key:value pairs (in *descending* order of TF-IDF scores)
+        for(int i = 0; i < Math.min(entries.size(), 10); i++){
+            bestScoredWords.add(entries.get(i).getKey());
+        }
 
-
-        return null;
+        return bestScoredWords;
     }
 
     // TODO: Implement this method. Hint: Follow the comments
@@ -103,29 +126,29 @@ public class DevicePartDiscovery {
      */
     public Map<String, Double> calculateIdfScores(List<Map<String, Integer>> catalogWordCounts) {
         // Calculate the Document Frequency (DF) scores for each unique word in our catalogs
-
+        Map<String, Integer> dfScores = getDfScores(catalogWordCounts);
         // Create a map which associates a word (String) with it's idf score (Double);
-
+        Map<String, Double> idfScores = new HashMap<>();
         // get the overall number of catalogs we have
-
+        int totalCatalogs = catalogWordCounts.size();
         // For each word in our catalog, get the word:dfScore relationship for it
-
-        // Get the word from our word:dfScore relationship
-
-        // Get the DF score from our word:dfScore relatiohnship
-
-
-            /*
+        for(Map.Entry<String, Integer> entry : dfScores.entrySet()){
+            // Get the word from our word:dfScore relationship
+            String word = entry.getKey();
+            // Get the DF score from our word:dfScore relatiohnship
+            int dfScore = entry.getValue();
+             /*
                 Calculate the IDF score for the word
                 We need to cast one of our values to double in order to
                 get a double return value from the division.
                 Otherwise, we will lose floating-point precision.
              */
+            double idfScore = Math.log10((double) totalCatalogs / dfScore);
+            // add the idf score for the word to our map
+            idfScores.put(word, idfScore);
+        }
 
-
-        // add the idf score for the word to our map
-
-        return null;
+        return idfScores;
     }
 
     private static Map<String, Integer> getDfScores(List<Map<String, Integer>> catalogWordCounts) {

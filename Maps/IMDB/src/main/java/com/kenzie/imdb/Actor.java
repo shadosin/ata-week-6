@@ -30,13 +30,16 @@ public class Actor {
     }
 
     //TODO: Implement this method
+
     @Override
-    public boolean equals(Object obj) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Actor actor)) return false;
+        return name.equals(actor.name) && birthdate.equals(actor.birthdate) && birthCity.equals(actor.birthCity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, birthdate, birthCity);
     }
 }

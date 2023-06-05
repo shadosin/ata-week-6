@@ -30,13 +30,16 @@ public class Movie {
     }
 
     // TODO: Implement this method
+
     @Override
-    public boolean equals(Object obj) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie movie)) return false;
+        return name.equals(movie.name) && director.equals(movie.director) && yearReleased.equals(movie.yearReleased);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name);
+        return Objects.hash(name, director, yearReleased);
     }
 }

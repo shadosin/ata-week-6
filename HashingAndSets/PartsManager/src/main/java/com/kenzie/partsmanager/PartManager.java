@@ -18,12 +18,12 @@ public class PartManager {
 
     public boolean isDevicePartIncluded(DevicePart toCheck){
         //TODO: Update this method to return true if a devicePart is included in the set
-        return false;
+        return deviceParts.contains(toCheck);
     }
 
     public boolean removeSpecificPart(DevicePart toRemove){
         //TODO: Update this method to actually remove the devicePart
-        return false;
+        return deviceParts.remove(toRemove);
     }
 
     public Set<DevicePart> getDeviceParts() {

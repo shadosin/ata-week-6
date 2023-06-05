@@ -6,11 +6,23 @@ adding classes, relationships, and methods
 '/
 
 
-class Book
-class ProductInformation
-
-enum Categories {
-
+class Book{
+-String author
+-BigDecimal length
+}
+class ProductInformation{
+-String asin
+-String displayName
+-String description
+-Set<String> imageUrls
+}
+class Genre{
+-Title
+-bookType
 }
 
+
+
+Book o-- ProductInformation
+ProductInformation o-- Genre
 @enduml

@@ -1,6 +1,8 @@
 package com.kenzie.deliverydrone;
 
 
+import java.util.Objects;
+
 /**
  * An Amazon Delivery Drone.
  */
@@ -39,15 +41,17 @@ public class DeliveryDrone {
     }
 
     //TODO: Fix this implementation of hashCode
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DeliveryDrone that)) return false;
+        return getRegistrationNumber().equals(that.getRegistrationNumber()) && getLocationCode().equals(that.getLocationCode());
+    }
+
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(getRegistrationNumber());
     }
-
-    //TODO: Fix this implementation of equals
-    @Override
-    public boolean equals(Object obj) {
-        return false;
-    }
-
 }

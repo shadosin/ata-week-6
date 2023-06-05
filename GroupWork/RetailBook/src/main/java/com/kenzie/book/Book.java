@@ -1,6 +1,7 @@
 package com.kenzie.book;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 public class Book {
@@ -15,40 +16,43 @@ public class Book {
     }
 
     public String getAsin() {
-        return null;
+        return productInformation.getAsin();
     }
 
     public String getTitle() {
-        return null;
+        return productInformation.getDisplayName();
     }
 
     public String getAuthor() {
-        return null;
+        return author;
     }
 
     public String getDescription() {
-        return null;
+        return productInformation.getDescription();
     }
 
     public Set<String> getImageUrls() {
-        return null;
+        return productInformation.getImageUrls();
     }
 
     public BigDecimal getLength() {
-        return null;
+        return length;
     }
 
     public double calculateSimilarity(Book other) {
-        return 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
+        return productInformation.calculateSimilarity(other.productInformation);
     }
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+        return productInformation.getAsin().equals(((Book) o).getAsin());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAsin());
     }
 }
+
